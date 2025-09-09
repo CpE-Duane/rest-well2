@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import eah from "./assets/Eah.png";
-import softspot from "./assets/softspot.mp3"; // ✅ place Soft Spot (keshi) MP3 here
+import softspot from "./assets/softspot.mp3"; // ✅ Soft Spot (keshi) mp3
 
 const GetWellBook: React.FC = () => {
   const [opened, setOpened] = useState(false);
@@ -28,24 +28,29 @@ const GetWellBook: React.FC = () => {
           font-family: 'Segoe UI', sans-serif;
           background: linear-gradient(135deg, #4b0082, #8a2be2, #dda0dd);
           height: 100vh;
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          width: 100vw;
           overflow: hidden;
+
+          /* ✅ flexbox centering */
+          display: flex;
+          justify-content: center;
+          align-items: center;
         }
+
         .book-container {
           perspective: 2000px;
           width: clamp(220px, 30vw, 400px);
-          height: clamp(380px, 80vh, 700px); /* taller rectangle */
+          height: clamp(360px, 75vh, 700px); /* taller rectangle */
           cursor: pointer;
-          position: relative;
         }
+
         .book {
           width: 100%;
           height: 100%;
           position: relative;
           transform-style: preserve-3d;
         }
+
         .page, .cover, .message-page {
           position: absolute;
           top: 0;
@@ -57,6 +62,7 @@ const GetWellBook: React.FC = () => {
           border-radius: 6px;
           box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
+
         .cover {
           background: #4b0082;
           background-image: radial-gradient(circle at top left, #6a0dad, #4b0082 70%);
@@ -70,6 +76,7 @@ const GetWellBook: React.FC = () => {
           padding: 5% 8%;
           z-index: 5;
         }
+
         .cover::before {
           content: "";
           position: absolute;
@@ -80,6 +87,7 @@ const GetWellBook: React.FC = () => {
           border: 2px solid gold;
           pointer-events: none;
         }
+
         .cover .title {
           flex-grow: 1;
           display: flex;
@@ -94,9 +102,11 @@ const GetWellBook: React.FC = () => {
           letter-spacing: 2px;
           text-transform: uppercase;
         }
+
         .cover .title div {
           display: block;
         }
+
         .cover .author {
           color: gold;
           font-size: clamp(10px, 2vw, 18px);
@@ -104,29 +114,33 @@ const GetWellBook: React.FC = () => {
           text-transform: uppercase;
           margin-top: 10px;
         }
+
         .page {
           background: #d8b9f2;
         }
+
         .page1 { z-index: 4; }
         .page2 { z-index: 3; }
 
         .message-page {
           background: url(${eah}) center center / cover no-repeat;
+          width: 100%;
+          height: 100%;
           display: flex;
-          align-items: center;
-          justify-content: center;
+          align-items: start;   /* ✅ center vertically */
+          justify-content: center; /* ✅ center horizontally */
           text-align: center;
-          padding: 20px;
+          box-sizing: border-box;
+          padding: 5%;
           z-index: 1;
           transform: rotateY(180deg); /* hidden at first */
           backface-visibility: hidden;
-          position: absolute;
-          top: 0;
-          left: 0;
+          border-radius: 6px;
         }
+
         .message-text {
           font-family: 'Great Vibes', cursive;
-          font-size: clamp(24px, 3.2vw, 36px);
+          font-size: clamp(20px, 3vw, 32px);
           font-weight: 700;
           background: linear-gradient(45deg, #a020f0, #da70d6, #dda0dd);
           -webkit-background-clip: text;
@@ -134,9 +148,9 @@ const GetWellBook: React.FC = () => {
           text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
           opacity: 0;
           z-index: 2;
-          position: relative;
           line-height: 1.5;
           letter-spacing: 2px;
+          max-width: 80%;
         }
 
         /* Animations */
@@ -155,6 +169,7 @@ const GetWellBook: React.FC = () => {
         .book.opened .message-text {
           animation: fadeIn 1s 2s forwards;
         }
+
         @keyframes coverFlip {
           to { transform: rotateY(-180deg); }
         }
@@ -186,7 +201,7 @@ const GetWellBook: React.FC = () => {
           <div className="message-page">
             <div className="message-text">
               Wishing you a<br />speedy recovery 💜<br />
-              Please rest well 🌸<br /><br />
+              Please rest well 🌸<br />
               I miss you 💖
             </div>
           </div>
